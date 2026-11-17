@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>Tempestad</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌀</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <canvas id="c"></canvas>
+
+  <div id="hud" class="hidden">
+    <div id="board"></div>
+    <div id="top">
+      <div id="cat">Perturbación</div>
+      <div id="wind">40 km/h</div>
+      <div id="event" class="hidden"></div>
+      <div id="zone"></div>
+    </div>
+    <canvas id="mini" width="150" height="150"></canvas>
+    <div id="feed"></div>
+    <div id="bottom">
+      <div id="bar"><div id="barFill"></div></div>
+      <div id="next"></div>
+      <div id="hint">Mouse: guiar · Espacio: dividir 🌀 · W: soltar nube 💨</div>
+    </div>
+    <div id="mobileBtns">
+      <button id="btnEject">💨</button>
+      <button id="btnSplit">🌀</button>
+    </div>
+    <div id="joy"><div id="knob"></div></div>
+  </div>
+  <div id="banner"></div>
+
+  <div id="start" class="overlay">
+    <div class="card">
+      <div class="logo">🌀</div>
+      <h1>TEMPESTAD</h1>
+      <p class="sub">Naciste como una perturbación sobre el mar tibio.<br/>Chupá nubes, barcos, palmeras y hoteles. Tragate a las tormentas más chicas. Llegá a <b>Categoría 5</b>.</p>
+      <ul class="rules">
+        <li>🌡️ El <b>agua caliente</b> te alimenta. La <b>tierra</b> te debilita.</li>
+        <li>🌀 <b>Dividite</b> para atrapar tormentas, pero quedás en pedazos.</li>
+        <li>⛰️ Las <b>montañas</b> despedazan a los huracanes grandes. Los chicos se esconden ahí.</li>
+        <li>💨 <b>Soltá nubes</b> para huir más liviano o alimentar a un amigo.</li>
+      </ul>
+      <input id="nameIn" maxlength="14" placeholder="Nombre de tu huracán" />
+      <button id="play">¡A FORMARSE!</button>
+    </div>
+  </div>
+
+  <div id="dead" class="overlay hidden">
+    <div class="card">
+      <div class="logo">💨</div>
+      <h1 id="deadTitle">Te disipaste</h1>
+      <p id="deadWhy" class="sub"></p>
+      <div id="deadStats"></div>
+      <button id="again">FORMAR OTRA TORMENTA</button>
+    </div>
+  </div>
+
+  <div id="loading" class="overlay"><div class="card"><div class="logo spin">🌀</div><p class="sub">Calentando el océano…</p></div></div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

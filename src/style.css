@@ -1,0 +1,77 @@
+:root { --acc: #5fd4ff; --acc2: #b98cff; --ink: #eaf6ff; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #06223f; font-family: 'Baloo 2', system-ui, sans-serif; color: var(--ink); user-select: none; -webkit-user-select: none; touch-action: none; }
+#c { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+.hidden { display: none !important; }
+
+#hud { position: fixed; inset: 0; pointer-events: none; }
+#board { position: absolute; top: calc(10px + env(safe-area-inset-top)); left: 10px; background: rgba(4, 20, 40, .55); border-radius: 12px; padding: 8px 12px; font-size: 14px; min-width: 190px; backdrop-filter: blur(4px); }
+#board .row { display: flex; gap: 8px; align-items: center; line-height: 1.45; }
+#board .row.me { color: var(--acc); font-weight: 800; }
+#board .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+#board .nm { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#board .ms { opacity: .85; font-variant-numeric: tabular-nums; }
+
+#top { position: absolute; top: calc(8px + env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); text-align: center; }
+#cat { font-size: 26px; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,.5); letter-spacing: .5px; }
+#wind { font-size: 15px; opacity: .9; margin-top: -4px; }
+#event { margin-top: 4px; font-weight: 800; font-size: 15px; padding: 3px 12px; border-radius: 99px; background: rgba(255, 140, 60, .8); display: inline-block; }
+#event.cold { background: rgba(80, 160, 255, .85); }
+#event.rain { background: rgba(120, 120, 255, .85); }
+#zone { margin-top: 4px; font-size: 14px; font-weight: 700; min-height: 20px; }
+#zone.warm { color: #ffb36b; }
+#zone.land { color: #ff8080; }
+
+#mini { position: absolute; top: calc(10px + env(safe-area-inset-top)); right: 10px; width: 150px; height: 150px; border-radius: 14px; border: 2px solid rgba(255,255,255,.25); background: #06223f; }
+#feed { position: absolute; top: calc(170px + env(safe-area-inset-top)); right: 10px; display: flex; flex-direction: column; gap: 4px; align-items: flex-end; font-size: 13px; }
+#feed div { background: rgba(4, 20, 40, .6); padding: 2px 10px; border-radius: 10px; animation: fade 5s forwards; }
+@keyframes fade { 0%, 80% { opacity: 1 } 100% { opacity: 0 } }
+
+#bottom { position: absolute; bottom: calc(14px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); width: min(460px, 70vw); text-align: center; }
+#bar { height: 10px; background: rgba(255,255,255,.15); border-radius: 99px; overflow: hidden; }
+#barFill { height: 100%; width: 0; background: linear-gradient(90deg, var(--acc), var(--acc2)); transition: width .3s; }
+#next { font-size: 13px; margin-top: 3px; opacity: .9; }
+#hint { font-size: 12px; opacity: .6; margin-top: 2px; }
+
+#banner { position: fixed; top: 32%; left: 50%; transform: translate(-50%, -50%) scale(.8); font-size: 44px; font-weight: 800; text-align: center; pointer-events: none; opacity: 0; text-shadow: 0 4px 18px rgba(0,0,0,.6); transition: opacity .3s, transform .3s; white-space: nowrap; }
+#banner.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+#banner small { display: block; font-size: 18px; font-weight: 600; opacity: .9; }
+
+#mobileBtns { display: none; position: absolute; right: 16px; bottom: calc(80px + env(safe-area-inset-bottom)); gap: 14px; flex-direction: column; pointer-events: auto; }
+#mobileBtns button { width: 70px; height: 70px; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); background: rgba(10, 40, 80, .6); font-size: 32px; color: #fff; }
+#mobileBtns button:active { transform: scale(.92); background: rgba(95, 212, 255, .5); }
+#joy { position: absolute; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 2px solid rgba(255,255,255,.35); background: rgba(255,255,255,.08); display: none; }
+#knob { position: absolute; left: 50%; top: 50%; width: 50px; height: 50px; margin: -25px 0 0 -25px; border-radius: 50%; background: rgba(255,255,255,.5); }
+
+.overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 40%, rgba(10, 60, 110, .55), rgba(2, 10, 25, .85)); z-index: 10; padding: 16px; }
+.card { background: rgba(6, 28, 54, .88); border: 1px solid rgba(255,255,255,.15); border-radius: 22px; padding: 22px 26px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.logo { font-size: 56px; line-height: 1; }
+.spin { animation: spin 1.4s linear infinite; display: inline-block; }
+@keyframes spin { to { transform: rotate(-360deg); } }
+h1 { margin: 6px 0 2px; font-size: 42px; letter-spacing: 3px; background: linear-gradient(90deg, var(--acc), #fff, var(--acc2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sub { margin: 4px 0 10px; opacity: .9; line-height: 1.35; }
+.rules { text-align: left; padding-left: 4px; list-style: none; margin: 8px 0 14px; font-size: 14.5px; line-height: 1.45; }
+input { width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.08); color: #fff; font: inherit; font-size: 17px; text-align: center; margin-bottom: 10px; outline: none; }
+button { cursor: pointer; font-family: inherit; }
+#play, #again { width: 100%; padding: 12px; border: 0; border-radius: 14px; font-size: 21px; font-weight: 800; color: #04213d; background: linear-gradient(90deg, var(--acc), var(--acc2)); box-shadow: 0 6px 20px rgba(95, 212, 255, .35); }
+#play:active, #again:active { transform: scale(.97); }
+#deadStats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0 16px; }
+#deadStats div { background: rgba(255,255,255,.07); border-radius: 12px; padding: 8px; font-size: 13px; }
+#deadStats b { display: block; font-size: 20px; }
+
+@media (pointer: coarse) {
+  #mobileBtns { display: flex; }
+  #hint { display: none; }
+  #board { font-size: 11.5px; min-width: 0; width: 138px; padding: 6px 8px; }
+  #mini { width: 96px; height: 96px; }
+  #feed { top: calc(114px + env(safe-area-inset-top)); font-size: 11px; max-width: 55vw; }
+  #top { top: auto; bottom: calc(150px + env(safe-area-inset-bottom)); width: 70vw; }
+  #cat { font-size: 17px; }
+  #wind, #zone { font-size: 12px; }
+  #event { font-size: 12px; }
+  #banner { font-size: 30px; }
+  #bottom { width: 56vw; left: 40%; }
+  #next { font-size: 11px; }
+  .rules { font-size: 13px; }
+  h1 { font-size: 34px; }
+}
